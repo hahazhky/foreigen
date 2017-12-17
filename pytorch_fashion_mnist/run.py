@@ -17,7 +17,7 @@ test_transform = transforms.Compose([
     transforms.ToTensor(),
     # transforms.Normalize([0.5], [0.5])
 ])
-f_mnist = {'train': FashionMNIST('./fashion/', train=True, download=False, transform=train_transform),
+f_mnist = {'train': FashionMNIST('./fashion/', train=True, download=True, transform=train_transform),
            'test': FashionMNIST('./fashion/', train=False, download=False, transform=test_transform)}
 
 dataloaders = {'train': torch.utils.data.DataLoader(f_mnist['train'], batch_size=128, shuffle=True, num_workers=4),
