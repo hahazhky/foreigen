@@ -81,14 +81,14 @@ y_predict = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)  # softmax层
 cross_entropy = -tf.reduce_mean(y_actual*tf.log(y_predict))
 # cross_entropy = tf.reduce_mean(
 #      tf.nn.softmax_cross_entropy_with_logits(labels=y_actual, logits=y_predict))
-train_step = tf.train.AdamOptimizer(5e-4).minimize(cross_entropy)  # Adam
+train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)  # Adam
 correct_prediction = tf.equal(tf.argmax(y_predict, 1), tf.argmax(y_actual, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 sess = tf.InteractiveSession()
 sess.run(tf.global_variables_initializer())
 
 best_acc = 0
-for i in range(1, 20001):
+for i in range(1, 30001):
     train_batch = mnist.train.next_batch(200)
     if i % 500 == 0:  # 训练100次，验证一次
         train_acc = accuracy.eval(feed_dict={x: train_batch[0], y_actual: train_batch[1],
